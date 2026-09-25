@@ -1,6 +1,6 @@
 # Kappelhoj.eu
 
-Personal website and developer playground for [Arvid Langsøe](https://www.kappelhoj.eu).
+Personal website and developer playground for [Arvid Kappelhøj](https://www.kappelhoj.eu).
 
 Built with [Astro](https://astro.build/) for static HTML output with 0 KB JavaScript baseline, plus a modular architecture for experimenting with drop-in interactive submodules (HTMX, Canvas, Vue, etc.).
 
