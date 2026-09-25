@@ -1,6 +1,6 @@
 # Kappelhoj Web — Developer & AI Guide
 
-Welcome to **`kappelhoj-web`** (`www.kappelhoj.com`), a lightweight, modular personal website and playground built with **Astro**.
+Welcome to **`kappelhoj-web`** (`www.kappelhoj.eu`), a lightweight, modular personal website and playground built with **Astro**.
 
 ---
 
@@ -19,7 +19,7 @@ Welcome to **`kappelhoj-web`** (`www.kappelhoj.com`), a lightweight, modular per
 * **Framework:** [Astro](https://astro.build/) (Static Site Generation, 0 KB JS baseline).
 * **Styles:** Scoped CSS + CSS custom properties (`--main-dark-color`, `--secondary-dark-color`, `--main-white-color`).
 * **Submodule Architecture:** Standalone widgets and experiments located in `src/submodules/` that can be embedded into any page.
-* **Hosting:** GitHub Pages via custom domain `www.kappelhoj.com` (configured in `public/CNAME`).
+* **Hosting:** GitHub Pages via custom domain `www.kappelhoj.eu` (configured in `public/CNAME`).
 
 ---
 
@@ -31,7 +31,7 @@ kappelhoj-web/
 │   └── workflows/
 │       └── web-build-and-publish.yml   # Tag-triggered GitHub Pages deployment
 ├── public/
-│   ├── CNAME                           # Custom domain configuration (www.kappelhoj.com)
+│   ├── CNAME                           # Custom domain configuration (www.kappelhoj.eu)
 │   ├── favicon.ico
 │   └── social-logos/                   # Social media branding icons
 ├── src/
