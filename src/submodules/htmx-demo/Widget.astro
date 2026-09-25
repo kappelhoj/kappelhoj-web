@@ -1,0 +1,97 @@
+---
+// HTMX Counter / State Demo submodule
+---
+
+<div class="htmx-container">
+  <div class="counter-box">
+    <span class="count-display" id="click-counter">0</span>
+    <span class="count-label">clicks recorded</span>
+  </div>
+  <div class="actions">
+    <button 
+      class="btn" 
+      onclick="document.getElementById('click-counter').textContent = parseInt(document.getElementById('click-counter').textContent) + 1"
+    >
+      + Increment
+    </button>
+    <button 
+      class="btn btn-secondary" 
+      onclick="document.getElementById('click-counter').textContent = '0'"
+    >
+      Reset
+    </button>
+  </div>
+  <p class="hint">
+    This submodule illustrates how lightweight interactive controls can be embedded anywhere with zero framework dependencies.
+  </p>
+</div>
+
+<style>
+  .htmx-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem 0;
+  }
+
+  .counter-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: #f8fafc;
+    border: 1px dashed var(--border-color);
+    border-radius: 8px;
+    padding: 1.5rem 3rem;
+  }
+
+  .count-display {
+    font-size: 3rem;
+    font-weight: 800;
+    color: var(--main-dark-color);
+    line-height: 1;
+  }
+
+  .count-label {
+    font-size: 0.85rem;
+    color: var(--secondary-dark-color);
+    margin-top: 0.25rem;
+  }
+
+  .actions {
+    display: flex;
+    gap: 0.75rem;
+  }
+
+  .btn {
+    background: var(--main-dark-color);
+    color: var(--main-white-color);
+    border: none;
+    border-radius: 6px;
+    padding: 0.6rem 1.25rem;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.1s ease, opacity 0.2s ease;
+  }
+
+  .btn:hover {
+    opacity: 0.9;
+  }
+
+  .btn:active {
+    transform: scale(0.97);
+  }
+
+  .btn-secondary {
+    background: #e2e8f0;
+    color: var(--main-dark-color);
+  }
+
+  .hint {
+    font-size: 0.85rem;
+    color: var(--secondary-dark-color);
+    margin-top: 0.5rem;
+    text-align: center;
+  }
+</style>

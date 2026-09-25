@@ -1,0 +1,176 @@
+---
+// Interactive HTML5 Canvas Submodule Demo
+---
+
+<div class="canvas-widget">
+  <canvas id="particle-canvas" class="particle-canvas"></canvas>
+  <div class="canvas-controls">
+    <span class="canvas-hint">Move your mouse or touch the canvas to interact with particles</span>
+    <button id="clear-particles-btn" class="btn-small">Reset Canvas</button>
+  </div>
+</div>
+
+<script>
+  function initParticleCanvas() {
+    const canvas = document.getElementById('particle-canvas') as HTMLCanvasElement;
+    if (!canvas) return;
+
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return;
+
+    let width = (canvas.width = canvas.parentElement?.clientWidth || 600);
+    let height = (canvas.height = 240);
+
+    const particles: Array<{
+      x: number;
+      y: number;
+      vx: number;
+      vy: number;
+      radius: number;
+      color: string;
+    }> = [];
+
+    const colors = ['#2c3e50', '#556b82', '#42b983', '#3b82f6'];
+
+    function createParticle(x: number, y: number) {
+      particles.push({
+        x,
+        y,
+        vx: (Math.random() - 0.5) * 2,
+        vy: (Math.random() - 0.5) * 2,
+        radius: Math.random() * 3 + 2,
+        color: colors[Math.floor(Math.random() * colors.length)]
+      });
+      if (particles.length > 60) {
+        particles.shift();
+      }
+    }
+
+    // Populate initial particles
+    for (let i = 0; i < 30; i++) {
+      createParticle(Math.random() * width, Math.random() * height);
+    }
+
+    function handlePointer(e: MouseEvent | TouchEvent) {
+      const rect = canvas.getBoundingClientRect();
+      const clientX = 'touches' in e ? e.touches[0].clientX : e.clientX;
+      const clientY = 'touches' in e ? e.touches[0].clientY : e.clientY;
+      const x = clientX - rect.left;
+      const y = clientY - rect.top;
+      createParticle(x, y);
+    }
+
+    canvas.addEventListener('mousemove', handlePointer);
+    canvas.addEventListener('touchmove', handlePointer);
+
+    document.getElementById('clear-particles-btn')?.addEventListener('click', () => {
+      particles.length = 0;
+      for (let i = 0; i < 20; i++) {
+        createParticle(Math.random() * width, Math.random() * height);
+      }
+    });
+
+    window.addEventListener('resize', () => {
+      if (canvas.parentElement) {
+        width = canvas.width = canvas.parentElement.clientWidth;
+        height = canvas.height = 240;
+      }
+    });
+
+    let animationFrameId: number;
+    function render() {
+      if (!ctx) return;
+      ctx.clearRect(0, 0, width, height);
+
+      // Connect nearby particles
+      for (let i = 0; i < particles.length; i++) {
+        for (let j = i + 1; j < particles.length; j++) {
+          const dx = particles[i].x - particles[j].x;
+          const dy = particles[i].y - particles[j].y;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+          if (dist < 80) {
+            ctx.beginPath();
+            ctx.strokeStyle = `rgba(85, 107, 130, ${1 - dist / 80})`;
+            ctx.lineWidth = 0.6;
+            ctx.moveTo(particles[i].x, particles[i].y);
+            ctx.lineTo(particles[j].x, particles[j].y);
+            ctx.stroke();
+          }
+        }
+      }
+
+      // Draw and update particles
+      particles.forEach((p) => {
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+        ctx.fillStyle = p.color;
+        ctx.fill();
+
+        p.x += p.vx;
+        p.y += p.vy;
+
+        if (p.x < 0 || p.x > width) p.vx *= -1;
+        if (p.y < 0 || p.y > height) p.vy *= -1;
+      });
+
+      animationFrameId = requestAnimationFrame(render);
+    }
+
+    render();
+  }
+
+  // Run on mount
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initParticleCanvas);
+  } else {
+    initParticleCanvas();
+  }
+</script>
+
+<style>
+  .canvas-widget {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    background: #f8fafc;
+    border-radius: 6px;
+    overflow: hidden;
+    border: 1px solid var(--border-color);
+  }
+
+  .particle-canvas {
+    width: 100%;
+    height: 240px;
+    display: block;
+    cursor: crosshair;
+  }
+
+  .canvas-controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.75rem 1rem;
+    background: #ffffff;
+    border-top: 1px solid var(--border-color);
+  }
+
+  .canvas-hint {
+    font-size: 0.85rem;
+    color: var(--secondary-dark-color);
+  }
+
+  .btn-small {
+    background: #e2e8f0;
+    color: var(--main-dark-color);
+    border: none;
+    border-radius: 4px;
+    padding: 0.35rem 0.75rem;
+    font-size: 0.8rem;
+    font-weight: 600;
+    cursor: pointer;
+  }
+
+  .btn-small:hover {
+    background: #cbd5e1;
+  }
+</style>
