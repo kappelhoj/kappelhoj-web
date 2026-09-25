@@ -1,0 +1,54 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Home">
+  <section class="hero-section">
+    <h1 class="hero-title">Welcome to my page!</h1>
+    <p class="hero-subtitle">Hello! This is my personal website.</p>
+    <p class="hero-text">
+      Explore the <a href="/dev" class="inline-link">Dev Playground</a> to see experimental submodules, or find my profiles in the footer below.
+    </p>
+  </section>
+</Layout>
+
+<style>
+  .hero-section {
+    text-align: center;
+    padding: 5rem 1rem 3rem 1rem;
+    max-width: 720px;
+    margin: 0 auto;
+  }
+
+  .hero-title {
+    font-size: 2.5rem;
+    font-weight: 800;
+    margin-bottom: 1.5rem;
+    color: var(--main-dark-color);
+    letter-spacing: -0.03em;
+  }
+
+  .hero-subtitle {
+    font-size: 1.35rem;
+    font-weight: 600;
+    color: var(--secondary-dark-color);
+    margin-bottom: 1rem;
+  }
+
+  .hero-text {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: var(--secondary-dark-color);
+  }
+
+  .inline-link {
+    color: var(--main-dark-color);
+    font-weight: 600;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  .inline-link:hover {
+    color: var(--accent-color);
+  }
+</style>

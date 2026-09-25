@@ -1,0 +1,70 @@
+---
+import Layout from '../layouts/Layout.astro';
+import SubmoduleCard from '../components/SubmoduleCard.astro';
+import HtmxWidget from '../submodules/htmx-demo/Widget.astro';
+import CanvasWidget from '../submodules/canvas-demo/Widget.astro';
+---
+
+<Layout title="Dev Playground" enableHtmx={true}>
+  <div class="dev-container">
+    <div class="dev-header">
+      <h1 class="page-title">Developer Playground</h1>
+      <p class="page-subtitle">
+        A sandbox for modular experiments, interactive widgets, and mini-projects.
+      </p>
+    </div>
+
+    <div class="submodules-list">
+      <!-- Submodule 1: Interactive Canvas Experiment -->
+      <SubmoduleCard 
+        title="Particle Physics Grid" 
+        description="Interactive HTML5 Canvas particle system with dynamic edge connections"
+        techBadge="Canvas / Vanilla JS"
+      >
+        <CanvasWidget />
+      </SubmoduleCard>
+
+      <!-- Submodule 2: Lightweight State Widget -->
+      <SubmoduleCard 
+        title="Lightweight State Controls" 
+        description="Zero-dependency modular counter demonstrating drop-in client interactivity"
+        techBadge="HTMX / HTML"
+      >
+        <HtmxWidget />
+      </SubmoduleCard>
+    </div>
+  </div>
+</Layout>
+
+<style>
+  .dev-container {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 1rem 0;
+  }
+
+  .dev-header {
+    margin-bottom: 2.5rem;
+    text-align: left;
+  }
+
+  .page-title {
+    font-size: 2.2rem;
+    font-weight: 800;
+    margin: 0 0 0.5rem 0;
+    color: var(--main-dark-color);
+    letter-spacing: -0.02em;
+  }
+
+  .page-subtitle {
+    font-size: 1.15rem;
+    color: var(--secondary-dark-color);
+    margin: 0;
+  }
+
+  .submodules-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+</style>
